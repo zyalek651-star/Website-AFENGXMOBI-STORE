@@ -3236,7 +3236,7 @@ window.supabase.createClient(
 );
 
 
-/* GOOGLE LOGIN */
+/* ================= GOOGLE LOGIN ================= */
 
 window.loginGoogle = async function(){
 
@@ -3247,7 +3247,7 @@ window.loginGoogle = async function(){
 
             options:{
                 redirectTo:
-                    "https://zyalek651-star.github.io/Website-AFENGXMOBI-STORE/",
+                "https://zyalek651-star.github.io/Website-AFENGXMOBI-STORE/",
 
                 queryParams:{
                     prompt:"select_account"
@@ -3256,11 +3256,10 @@ window.loginGoogle = async function(){
 
         });
 
-
     if(error){
 
         console.error(
-            "LOGIN GOOGLE ERROR:",
+            "GOOGLE LOGIN ERROR:",
             error
         );
 
@@ -3274,9 +3273,165 @@ window.loginGoogle = async function(){
 };
 
 
-/* UPDATE TAMPILAN LOGIN */
+/* ================= TAMPILAN LOGIN ================= */
 
-async function updateAuthUI(){
+function updateAuthUI(session){
+
+    const loginButton =
+        document.getElementById("loginButton");
+
+    const registerButton =
+        document.getElementById("registerButton");
+
+    const historyButton =
+        document.getElementById("historyButton");
+
+    const avatar =
+        document.getElementById("googleAvatar");
+
+    const buyButtonText =
+        document.getElementById("buyButtonText");
+
+
+    if(session){
+
+        console.log(
+            "LOGIN BERHASIL:",
+            session.user.email
+        );
+
+
+        if(loginButton)
+            loginButton.style.display = "none";
+
+
+        if(registerButton)
+            registerButton.style.display = "none";
+
+
+        if(historyButton)
+            historyButton.style.display = "block";
+
+
+        if(buyButtonText)
+            buyButtonText.textContent =
+                "🛒 BELI SEKARANG";
+
+
+        const picture =
+            session.user.user_metadata?.avatar_url ||
+            session.user.user_metadata?.picture ||
+            "";
+
+
+        if(avatar && picture){
+
+            avatar.src = picture;
+
+            avatar.style.display = "block";
+
+        }
+
+
+    }else{
+
+        console.log("BELUM LOGIN");
+
+
+        if(loginButton)
+            loginButton.style.display = "block";
+
+
+        if(registerButton)
+            registerButton.style.display = "block";
+
+
+        if(historyButton)
+            historyButton.style.display = "none";
+
+
+        if(avatar)
+            avatar.style.display = "none";
+
+
+        if(buyButtonText)
+            buyButtonText.textContent =
+                "🔐 LOGIN UNTUK BELI";
+
+    }
+
+}
+
+
+/* ================= CEK CALLBACK GOOGLE ================= */
+
+async function checkGoogleCallback(){
+
+    const url =
+        new URL(window.location.href);
+
+    const code =
+        url.searchParams.get("code");
+
+
+    /*
+       Kalau Google mengembalikan ?code=...
+       tukarkan code tersebut menjadi session
+    */
+
+    if(code){
+
+        console.log(
+            "Google code ditemukan, menukar menjadi session..."
+        );
+
+
+        const { data, error } =
+            await supabaseClient.auth.exchangeCodeForSession(
+                code
+            );
+
+
+        if(error){
+
+            console.error(
+                "EXCHANGE CODE ERROR:",
+                error
+            );
+
+            alert(
+                "Login Google gagal: " +
+                error.message
+            );
+
+            return;
+
+        }
+
+
+        console.log(
+            "SESSION BERHASIL:",
+            data.session
+        );
+
+
+        /*
+           Hapus ?code= dari URL
+           tanpa reload halaman
+        */
+
+        window.history.replaceState(
+            {},
+            document.title,
+            window.location.pathname
+        );
+
+    }
+
+
+    /*
+       Ambil session setelah callback selesai
+    */
 
     const { data, error } =
         await supabaseClient.auth.getSession();
@@ -3294,126 +3449,14 @@ async function updateAuthUI(){
     }
 
 
-    const session =
-        data.session;
-
-
-    const loginButton =
-        document.getElementById(
-            "loginButton"
-        );
-
-    const registerButton =
-        document.getElementById(
-            "registerButton"
-        );
-
-    const historyButton =
-        document.getElementById(
-            "historyButton"
-        );
-
-    const avatar =
-        document.getElementById(
-            "googleAvatar"
-        );
-
-    const buyButtonText =
-        document.getElementById(
-            "buyButtonText"
-        );
-
-
-    if(session){
-
-        console.log(
-            "LOGIN BERHASIL:",
-            session.user.email
-        );
-
-
-        if(loginButton)
-            loginButton.style.display =
-                "none";
-
-
-        if(registerButton)
-            registerButton.style.display =
-                "none";
-
-
-        if(historyButton)
-            historyButton.style.display =
-                "block";
-
-
-        if(buyButtonText)
-            buyButtonText.textContent =
-                "🛒 BELI SEKARANG";
-
-
-        const picture =
-            session.user.user_metadata?.avatar_url ||
-            session.user.user_metadata?.picture ||
-            "";
-
-
-        if(
-            picture &&
-            avatar
-        ){
-
-            avatar.src =
-                picture;
-
-            avatar.style.display =
-                "block";
-
-        }
-
-
-    }else{
-
-        console.log(
-            "BELUM LOGIN"
-        );
-
-
-        if(loginButton)
-            loginButton.style.display =
-                "block";
-
-
-        if(registerButton)
-            registerButton.style.display =
-                "block";
-
-
-        if(historyButton)
-            historyButton.style.display =
-                "none";
-
-
-        if(avatar)
-            avatar.style.display =
-                "none";
-
-
-        if(buyButtonText)
-            buyButtonText.textContent =
-                "🔐 LOGIN UNTUK BELI";
-
-    }
+    updateAuthUI(
+        data.session
+    );
 
 }
 
 
-/* CEK LOGIN SAAT HALAMAN DIBUKA */
-
-updateAuthUI();
-
-
-/* CEK KALAU LOGIN BERUBAH */
+/* ================= STATUS LOGIN BERUBAH ================= */
 
 supabaseClient.auth.onAuthStateChange(
     function(event, session){
@@ -3423,31 +3466,46 @@ supabaseClient.auth.onAuthStateChange(
             event
         );
 
-        updateAuthUI();
+        updateAuthUI(session);
 
     }
 );
 
-  /* RIWAYAT TRANSAKSI */
+
+/* ================= JALANKAN ================= */
+
+checkGoogleCallback();
+
+
+/* ================= RIWAYAT TRANSAKSI ================= */
 
 async function showTransactionHistory(){
 
     playClickSound();
 
     document.getElementById("homePage").style.display = "none";
+
     document.getElementById("detailPage").style.display = "none";
+
     document.getElementById("historyPage").style.display = "block";
 
-    const list = document.getElementById("historyList");
 
-    list.innerHTML = "Memuat riwayat transaksi...";
+    const list =
+        document.getElementById("historyList");
 
-    const { data, error } = await supabaseClient
+
+    list.innerHTML =
+        "Memuat riwayat transaksi...";
+
+
+    const { data, error } =
+        await supabaseClient
         .from("transactions")
         .select("*")
         .order("created_at", {
             ascending:false
         });
+
 
     if(error){
 
@@ -3457,7 +3515,9 @@ async function showTransactionHistory(){
             "❌ Gagal memuat riwayat transaksi.";
 
         return;
+
     }
+
 
     if(!data || data.length === 0){
 
@@ -3465,17 +3525,22 @@ async function showTransactionHistory(){
             "Belum ada transaksi.";
 
         return;
+
     }
 
+
     list.innerHTML = "";
+
 
     data.forEach(function(t){
 
         const item =
             document.createElement("div");
 
+
         item.className =
             "transaction-item";
+
 
         item.innerHTML = `
 
@@ -3495,7 +3560,9 @@ async function showTransactionHistory(){
 
             <div>
                 Total:
-                Rp ${Number(t.total_price || 0).toLocaleString("id-ID")}
+                Rp ${Number(
+                    t.total_price || 0
+                ).toLocaleString("id-ID")}
             </div>
 
             <div>
@@ -3505,8 +3572,11 @@ async function showTransactionHistory(){
 
             <div>
                 Waktu:
-                ${t.created_at
-                    ? new Date(t.created_at).toLocaleString("id-ID")
+                ${
+                    t.created_at
+                    ? new Date(
+                        t.created_at
+                      ).toLocaleString("id-ID")
                     : "-"
                 }
             </div>
@@ -3529,6 +3599,7 @@ async function showTransactionHistory(){
 
         `;
 
+
         list.appendChild(item);
 
     });
@@ -3540,12 +3611,21 @@ function closeTransactionHistory(){
 
     playClickSound();
 
-    document.getElementById("historyPage").style.display = "none";
-    document.getElementById("homePage").style.display = "block";
+
+    document.getElementById(
+        "historyPage"
+    ).style.display = "none";
+
+
+    document.getElementById(
+        "homePage"
+    ).style.display = "block";
+
 
     window.scrollTo(0,0);
 
 }
+
 </script>
 
 
