@@ -504,20 +504,6 @@ body{
     color:#001017;
 }
 
-.google-avatar{
-    width:40px;
-    height:40px;
-
-    border-radius:50%;
-
-    object-fit:cover;
-
-    border:2px solid #00d9ff;
-
-    box-shadow:
-        0 0 12px rgba(0,217,255,.35);
-}
-
 .benefit-list{
     color:#d6dce5;
     font-size:16px;
@@ -1413,12 +1399,214 @@ body{
     font-size:12px;
     font-weight:700;
   }
+  /* ================================
+   OVERLAY KODE PROMO BERHASIL
+================================ */
+
+.promo-success-overlay{
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:9999999;
+
+    align-items:center;
+    justify-content:center;
+
+    padding:20px;
+
+    background:rgba(0,0,0,.78);
+
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+}
+
+.promo-success-box{
+    width:100%;
+    max-width:340px;
+
+    padding:28px 22px;
+
+    text-align:center;
+
+    background:
+        linear-gradient(
+            145deg,
+            #1c3042,
+            #0b141f
+        );
+
+    border:1px solid #00eaff;
+    border-radius:20px;
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.8),
+        0 0 30px rgba(0,217,255,.35);
+
+    animation:promoSuccess .35s ease-out;
+}
+
+.promo-success-icon{
+    width:65px;
+    height:65px;
+
+    margin:0 auto 15px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:#00d9ff;
+    color:#001017;
+
+    font-size:32px;
+    font-weight:900;
+
+    box-shadow:
+        0 0 25px rgba(0,217,255,.5);
+}
+
+.promo-success-title{
+    color:#00eaff;
+    font-size:20px;
+    font-weight:900;
+}
+
+.promo-success-text{
+    margin-top:8px;
+
+    color:#d6dce5;
+    font-size:13px;
+    font-weight:700;
+}
+
+@keyframes promoSuccess{
+
+    from{
+        opacity:0;
+        transform:scale(.75) translateY(20px);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1) translateY(0);
+    }
+
+}
+  .qr-total-label{
+    margin-top:14px;
+    color:#9aa8b8;
+    font-size:12px;
+    font-weight:800;
+    text-align:center;
+}
+
+.qr-total{
+    margin-top:4px;
+    color:#00eaff;
+    font-size:26px;
+    font-weight:900;
+    text-align:center;
+    text-shadow:0 0 12px rgba(0,234,255,.45);
+}
+  /* =========================
+   BINGKAI JUDUL VARIAN
+========================= */
+
+#variantTitle{
+    display:inline-flex;
+    flex-direction:column;
+    align-items:flex-start;
+
+    margin:14px 0 12px;
+    padding:10px 18px;
+
+    color:#00eaff;
+    font-size:18px;
+    font-weight:900;
+    line-height:1.25;
+    letter-spacing:1px;
+
+    text-align:left;
+
+    border:2px solid #00eaff;
+    border-radius:10px;
+
+    text-shadow:0 0 8px rgba(0,234,255,.7);
+
+    box-shadow:
+        0 0 12px rgba(0,234,255,.25),
+        inset 0 0 10px rgba(0,234,255,.08);
+}
+
+/* RIWAYAT TRANSAKSI - FIX */
+#historyPage{
+    display:none;
+    position:relative;
+    z-index:99999;
+    width:100%;
+    max-width:1150px;
+    margin:0 auto;
+    padding:15px;
+}
+
+#historyPage .history-topbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    width:100%;
+    padding:12px;
+    border:1px solid rgba(0,234,255,.5);
+    border-radius:12px;
+    background:#071018;
+}
+
+#historyPage .history-back{
+    padding:10px 16px;
+    border:1px solid #00eaff;
+    border-radius:10px;
+    background:#0b202b;
+    color:#fff;
+    font-size:15px;
+    font-weight:900;
+    cursor:pointer;
+    pointer-events:auto;
+}
+
+#historyPage .history-title{
+    color:#00eaff;
+    font-size:18px;
+    font-weight:900;
+}
+
 </style>
 
 </head>
 <audio id="bgMusic" autoplay loop>
     <source src="https://raw.githubusercontent.com/zyalek651-star/AfengXMobi-audio/32ed0e45e094721fd0b88dc2a5398bf40da6aa37/ssstik.io_%40mirae_flins_1790410881736.mp3" type="audio/mpeg">
 </audio>
+  <!-- OVERLAY PROMO BERHASIL -->
+
+<div id="promoSuccessOverlay" class="promo-success-overlay">
+
+    <div class="promo-success-box">
+
+        <div class="promo-success-icon">
+            ✓
+        </div>
+
+        <div class="promo-success-title">
+            KODE BERHASIL DIGUNAKAN
+        </div>
+
+        <div class="promo-success-text">
+            Diskon 10% berhasil diterapkan
+        </div>
+
+    </div>
+
+</div>
 <body>
 
   <div id="animated-bg">
@@ -1430,6 +1618,149 @@ body{
 
 <style>
   
+  /* ================= BENEFIT BOX ================= */
+.benefit-box{
+    margin-top:14px;
+    padding:14px;
+    border:1px solid rgba(0,234,255,.45);
+    border-radius:12px;
+    background:linear-gradient(
+        145deg,
+        rgba(14,30,43,.95),
+        rgba(7,15,24,.95)
+    );
+    box-shadow:
+        0 0 12px rgb(8, 154, 255),
+        inset 0 0 10px rgb(0, 148, 252);
+}
+
+.benefit-title{
+    margin-bottom:10px;
+    color:#009dff;
+    font-size:15px;
+    font-weight:900;
+    line-height:1.5;
+    letter-spacing:.5px;
+}
+
+.benefit-list{
+    color:#108eff;
+    font-size:13px;
+    line-height:1.7;
+    font-weight:600;
+}
+
+.benefit-list div{
+    margin:4px 0;
+}
+
+
+/* ================= NOTE BOX ================= */
+.note-box{
+    margin-top:14px;
+    padding:14px;
+    border:1px solid rgba(7, 202, 255, 0.45098039215686275);
+    border-radius:12px;
+    background:linear-gradient(
+        145deg,
+        rgba(40,32,15,.95),
+        rgba(17,17,12,.95)
+    );
+    box-shadow:
+        0 0 12px rgb(13, 204, 255),
+        inset 0 0 10px rgb(0, 223, 255);
+}
+
+.note-box .info-box-title{
+    margin-bottom:8px;
+    color:#4aebff;
+    font-size:15px;
+    font-weight:900;
+}
+
+.note-box .info-box-content{
+    color:#49a9ff;
+    font-size:13px;
+    line-height:1.65;
+    font-weight:600;
+    white-space:pre-line;
+}
+  /* ================= TEKS PENJELASAN ================= */
+
+.info-box{
+    margin-top:14px;
+    padding:14px;
+    border:1px solid rgb(0, 234, 255);
+    border-radius:12px;
+    background:linear-gradient(
+        145deg,
+        rgba(14,30,43,.95),
+        rgba(7,15,24,.95)
+    );
+    box-shadow:
+        0 0 12px rgb(0, 234, 255),
+        inset 0 0 10px rgb(0, 234, 255);
+}
+
+
+.info-box-title{
+    margin-bottom:10px;
+    color:#00eaff;
+    font-size:21px;
+    font-weight:1000;
+    line-height:1.4;
+    letter-spacing:.7px;
+}
+
+.info-box-content{
+    color:#00b7f0;
+    font-size:17px;
+    line-height:1.7;
+    font-weight:900;
+    white-space:pre-line;
+}
+
+
+/* ================= TEKS BENEFIT ================= */
+
+.benefit-title{
+    margin-bottom:12px;
+    color:#00eaff;
+    font-size:20px;
+    font-weight:1000;
+    line-height:1.5;
+    letter-spacing:.5px;
+}
+
+.benefit-list{
+    color:#19b7ff;
+    font-size:17px;
+    line-height:1.75;
+    font-weight:900;
+}
+
+.benefit-list div{
+    margin:5px 0;
+}
+
+
+/* ================= TEKS NOTE ================= */
+
+.note-box .info-box-title{
+    margin-bottom:10px;
+    color:#ffd54a;
+    font-size:21px;
+    font-weight:1000;
+    line-height:1.4;
+}
+
+.note-box .info-box-content{
+    color:#d7e0e8;
+    font-size:17px;
+    line-height:1.75;
+    font-weight:900;
+    white-space:pre-line;
+}
   .back-button{
     display:inline-flex;
     position:relative;
@@ -1760,56 +2091,28 @@ body{
     object-position:center;
     border-radius:inherit;
           }
+  
   </style>
   
-
-<!-- ================= HOME ================= -->
 <div id="authBar" class="auth-bar">
-
-    <span class="country-flag">🇮🇩</span>
-
-    <button
-        id="loginButton"
-        class="auth-login"
-        type="button"
-        onclick="loginGoogle()">
-        MASUK
-    </button>
-
-    <button
-        id="registerButton"
-        class="auth-register"
-        type="button"
-        onclick="loginGoogle()">
-        DAFTAR
-    </button>
-
     <button
         id="historyButton"
         class="auth-history"
         type="button"
-        onclick="showTransactionHistory()"
-        style="display:none;">
-        📋 RIWAYAT
+        onclick="window.showTransactionHistory && window.showTransactionHistory()">
+        📋 TRANSAKSI
     </button>
-
-    <img
-        id="googleAvatar"
-        class="google-avatar"
-        src=""
-        alt="Profil"
-        style="display:none;">
 </div>
 
 <div id="homePage" class="container">
 
-<div class="header">
+    <div class="header">
 
-    <div class="logo">
-        AFENGX<span>MOBI</span> STORE
+        <div class="logo">
+            AFENGX<span>MOBI</span> STORE
+        </div>
+
     </div>
-
-</div>
 
 <div class="hero">
 
@@ -2051,28 +2354,62 @@ body{
 
 </div>
   
-        <div id="description" class="description"></div>
+        <!-- ================= PENJELASAN ================= -->
 
-    <div class="benefit-box">
+<div class="info-box">
 
-        <div class="benefit-title">
-            BENEFITH YANG DI DAPATKAN KETIKA BUY DI WEB/MANUAL VIP :
-        </div>
-
-        <div class="benefit-list">
-            <div>Proses Buy 0,01d ✅</div>
-            <div>Tanpa Batas Fitur (Unlock All Feature) ✅</div>
-            <div>Premium/VIP ✅</div>
-            <div>Permanent ✅</div>
-            <div>No Bug ✅</div>
-        </div>
-
+    <div class="info-box-title">
+        PENJELASAN
     </div>
 
-    <div class="subtitle" id="variantTitle">
-    Pilih Varian
+    <div
+        id="description"
+        class="info-box-content">
+    </div>
+
 </div>
 
+
+<!-- ================= BENEFIT ================= -->
+
+<div class="benefit-box">
+
+    <div class="benefit-title">
+        BENEFITH YANG DI DAPATKAN KETIKA BUY DI WEB/MANUAL VIP :
+    </div>
+
+    <div class="benefit-list">
+        <div>Proses Buy 0,01d ✅</div>
+        <div>Tanpa Batas Fitur (Unlock All Feature) ✅</div>
+        <div>Premium/VIP ✅</div>
+        <div>Permanent ✅</div>
+        <div>No Bug ✅</div>
+    </div>
+
+</div>
+
+
+<!-- ================= NOTE ================= -->
+
+<div class="info-box note-box">
+
+    <div class="info-box-title">
+        📝 NOTE :
+    </div>
+
+    <div
+        id="noteContent"
+        class="info-box-content">
+    </div>
+
+</div>
+
+
+<!-- ================= VARIAN ================= -->
+
+<div class="subtitle" id="variantTitle">
+    Pilih Varian
+</div>
 
 <div
     id="variants"
@@ -2214,7 +2551,7 @@ body{
     onclick="playClickSound(); buy()">
 
     <span id="buyButtonText">
-        🔐 LOGIN UNTUK BELI
+        BUY/SCAN QR UNTUK BUY
     </span>
 
     </button>
@@ -2376,7 +2713,12 @@ const gambar = {
 /* =====================================================
    DATA
 ===================================================== */
+const noteAPK = `JIKA KALIAN SUDAH MEMBELI DAN TIDAK TAHU CARA MAKAINYA/PAKAINYA KALIAN BISA MINTA TUTORIAL KE ADMIN DAN KALO MASIH BELUM BISA MAKA AKAN DI AJARKAN SAMPAI BISA.`;
 
+const noteSetMobi = `JIKA KALIAN MEMBELI SET MOBI TERUTAMAKAN TRYHARD "SOALNYA APA BANG?"SOALNYA JIKA KALIAN MEMBELI SET MOBI ITU ADA HUD SAMA KEYMAPPING NYA BARU YANG HARUS DI PASANG JIKA KALIAN TIDAK MAU PASANG KALIAN BISA PAKAI HUD/KEYMAPPINGAN LU SENDIRI JADI KALO BELI SET MOBI USAHAKAN TRYHARD SAMPAY HAFAL KALO SUDAH HAFAL ENAK BUAT MAIN NYA JADI MUDAH DAN ENAK.`;
+
+const noteSetAndro = `JIKA KALIAN MEMBELI SET ANDRO HANYA UNTUK AUTO HEADSHOT (HS) KALIAN SALAH SET ANDRO ADALAH SETTINGAN ANDROID YANG UNTUK MERINGAN KAN PERMAINAN DAN MENDAPATKAN KE LICINAN LAYAR "🗣️:BANG AKU BELI SET ANDRO KOK NGGAK ENAK/KURANG BUAT HS"NYA?" KALIAN KALO BELI SET ANDRO USAHAKAN BISA DRAG SOALNYA SET ANDRO DI SETTING UNTUK MENDAPATKAN BIDIKAN YANG ON POIN DAN JIKA KALIAN SUDAH BISA DRAG JADI ENAK UNTUK MENDAPATKAN HEADSHOT (HS).
+`;
 const data=[
 
 {
@@ -2386,8 +2728,7 @@ const data=[
     image:gambar.ggmp,
     popular:true,
 
-    description:
-    "GGMP APK (GG Mouse Pro 3) adalah aplikasi keymapping yang digunakan untuk menghubungkan serta mengatur keyboard dan mouse di HP Android.",
+    description:"GGMP APK (GG Mouse Pro 3) adalah aplikasi keymapping yang digunakan untuk menghubungkan serta mengatur keyboard dan mouse di HP Android.",
 
     variants:[
 
@@ -2412,14 +2753,13 @@ const data=[
 
 
 {
-    id:"bluestack",
-    name:"BLUESTACK",
+    id:"bluestacks",
+    name:"BLUESTACKS",
     category:"APK",
     image:gambar.bluestack,
     popular:true,
 
-    description:
-    "BlueStacks APK adalah aplikasi keymapping pihak ketiga untuk konfigurasi keyboard dan mouse pada perangkat Android.",
+    description:"BlueStacks APK adalah aplikasi keymapping pihak ketiga untuk konfigurasi keyboard dan mouse pada perangkat Android.",
 
     variants:[
 
@@ -2440,8 +2780,7 @@ const data=[
     image:gambar.msi,
     popular:true,
 
-    description:
-    "MSI APK adalah aplikasi keymapping pihak ketiga untuk konfigurasi keyboard dan mouse pada perangkat Android.",
+    description:"MSI APK adalah aplikasi keymapping pihak ketiga untuk konfigurasi keyboard dan mouse pada perangkat Android.",
 
     variants:[
 
@@ -2462,8 +2801,7 @@ const data=[
     image:gambar.setmobi,
     popular:true,
 
-    description:
-    "Set Mobi adalah rangkaian konfigurasi khusus pada aplikasi keymapping dan pengaturan perangkat.",
+    description:"Set Mobi adalah rangkaian konfigurasi khusus pada aplikasi keymapping dan pengaturan perangkat.",
 
     variants:[
 
@@ -2507,8 +2845,7 @@ const data=[
     image:gambar.setandro,
     popular:true,
 
-    description:
-    "Set Andro adalah rangkaian konfigurasi khusus pada HP Android untuk membantu meningkatkan responsivitas layar.",
+    description:"Set Andro adalah rangkaian konfigurasi khusus pada HP Android untuk membantu meningkatkan responsivitas layar.",
 
     variants:[
 
@@ -2810,40 +3147,62 @@ else{
 
     /* JUDUL VARIAN */
 
-    const variantTitle=
-        document.getElementById(
-            "variantTitle"
-        );
+const variantTitle =
+    document.getElementById("variantTitle");
 
-    if(current.id==="ggmp"){
+if(current.id === "ggmp"){
+    variantTitle.innerHTML = "GGMP 3 X/V?<br>LIST ALL👇";
+}
+else if(current.id === "bluestacks"){
+    variantTitle.innerHTML = "BLUESTACKS X/V?<br>LIST ALL👇";
+}
+else if(current.id === "msi"){
+    variantTitle.innerHTML = "MSI X/V?<br>LIST ALL👇";
+}
+else if(current.id === "setmobi"){
+    variantTitle.innerHTML = "SET MOBI?<br>LIST ALL👇";
+}
+else if(current.id === "setandro"){
+    variantTitle.innerHTML = "SET ANDRO?<br>LIST ALL👇";
+}
+else{
+    variantTitle.textContent = "Pilih Varian";
+}
 
-        variantTitle.textContent="GGMP";
+    renderVariants();
+
+updateOrder();
+
+
+/* NOTE */
+
+const noteContent =
+    document.getElementById("noteContent");
+
+if(noteContent){
+
+    if(current.category === "SET MOBI"){
+
+        noteContent.textContent = noteSetMobi;
 
     }
-    else if(current.id==="bluestack"){
+    else if(current.category === "SET ANDRO"){
 
-        variantTitle.textContent="BlueStacks (BS)";
-
-    }
-    else if(current.id==="msi"){
-
-        variantTitle.textContent="MSI";
+        noteContent.textContent = noteSetAndro;
 
     }
     else{
 
-        variantTitle.textContent="Pilih Varian";
+        noteContent.textContent = noteAPK;
 
     }
 
-
-    renderVariants();
-
-    updateOrder();
-
-    window.scrollTo(0,0);
-
 }
+
+
+window.scrollTo(0,0);
+
+  }
 
 
 /* VARIANT */
@@ -2896,28 +3255,43 @@ function renderVariants(){
         `;
 
         el.onclick=()=>{
-          
-playClickSound();
-          
-            document
-            .querySelectorAll(".variant")
-            .forEach(x=>{
 
-                x.classList.remove(
-                    "selected"
-                );
+    playClickSound();
 
-            });
+    document
+    .querySelectorAll(".variant")
+    .forEach(x=>{
+        x.classList.remove("selected");
+    });
 
-            el.classList.add(
-                "selected"
-            );
+    el.classList.add("selected");
 
-            selected=v;
+    selected=v;
 
-            updateOrder();
 
-        };
+    /* RESET PROMO SAAT GANTI VARIAN */
+
+    promoPercent = 0;
+
+    const promoInput =
+        document.getElementById("promoInput");
+
+    const promoMessage =
+        document.getElementById("promoMessage");
+
+    if(promoInput){
+        promoInput.value = "";
+    }
+
+    if(promoMessage){
+        promoMessage.textContent = "";
+        promoMessage.style.display = "none";
+    }
+
+
+    updateOrder();
+
+};
 
         box.appendChild(el);
 
@@ -2925,40 +3299,115 @@ playClickSound();
 
 }
 let promoPercent = 0;
-  function applyPromoCode(){
+  
+const PROMO_CODE = "ALIGANTENG";
+const PROMO_DISCOUNT = 10;
+const PROMO_EXP = "2026-09-30";
+  
+
+    function applyPromoCode(){
+
+    const input =
+        document.getElementById("promoInput");
 
     const code =
-        document.getElementById("promoInput").value
-        .trim()
-        .toUpperCase();
+        input.value.trim().toUpperCase();
 
     const message =
         document.getElementById("promoMessage");
 
-    if(code === "AFENG10"){
+    const overlay =
+        document.getElementById("promoSuccessOverlay");
 
-        promoPercent = 10;
+    const title =
+        document.querySelector(".promo-success-title");
 
-        message.textContent =
-            "✅ Kode AFENG10 berhasil! Diskon 10%";
+    const text =
+        document.querySelector(".promo-success-text");
 
-        message.style.color = "#6dff9b";
+    const icon =
+        document.querySelector(".promo-success-icon");
 
-    }else{
-document.getElementById("buyButtonText").textContent =
-    "🔐 LOGIN UNTUK BELI";
+
+    // Cek kode
+    if(code !== PROMO_CODE){
+
         promoPercent = 0;
 
-        message.textContent =
-            "❌ Kode promo tidak valid.";
+        input.value = "";
 
-        message.style.color = "#ff5555";
+        message.textContent = "";
+        message.style.display = "none";
 
+        title.textContent = "KODE TIDAK VALID";
+        text.textContent =
+            "Kode promo yang dimasukkan tidak valid";
+        icon.textContent = "✕";
+
+        overlay.style.display = "flex";
+
+        updateOrder();
+
+        setTimeout(function(){
+            overlay.style.display = "none";
+        }, 1800);
+
+        return;
     }
+
+
+    // Cek EXP
+    const sekarang = new Date();
+    const exp = new Date(PROMO_EXP + "T23:59:59");
+
+    if(sekarang > exp){
+
+        promoPercent = 0;
+
+        input.value = "";
+
+        message.textContent = "";
+        message.style.display = "none";
+
+        title.textContent = "KODE SUDAH EXPIRED";
+        text.textContent =
+            "Masa berlaku promo sudah berakhir";
+        icon.textContent = "✕";
+
+        overlay.style.display = "flex";
+
+        updateOrder();
+
+        setTimeout(function(){
+            overlay.style.display = "none";
+        }, 1800);
+
+        return;
+    }
+
+
+    // Kode benar + belum expired
+    promoPercent = PROMO_DISCOUNT;
+
+    input.value = "";
+
+    message.textContent = "";
+    message.style.display = "none";
+
+    title.textContent = "KODE BERHASIL DIGUNAKAN";
+    text.textContent =
+        "Diskon " + PROMO_DISCOUNT + "% berhasil diterapkan";
+    icon.textContent = "✓";
+
+    overlay.style.display = "flex";
 
     updateOrder();
 
-  }
+    setTimeout(function(){
+        overlay.style.display = "none";
+    }, 1800);
+
+    }
 
 /* UPDATE ORDER */
 
@@ -3053,18 +3502,14 @@ function home(){
 
 
 /* BUY */
-
 async function buy(){
 
-    const { data } =
-    await supabaseClient.auth.getSession();
+    const total =
+        document.getElementById("total").textContent;
 
-if(!data.session){
-
-    await loginGoogle();
-
-    return;
-}
+    document
+        .getElementById("qrTotal")
+        .textContent = total;
 
     document
         .getElementById("qrOverlay")
@@ -3072,7 +3517,7 @@ if(!data.session){
 
     generateQR();
 
-}
+      }
 
 let qrLibraryLoaded = false;
 
@@ -3175,7 +3620,6 @@ render();
 
 </script>
   
-
 </div>
   <!-- OVERLAY QR -->
 <div id="qrOverlay" class="qr-overlay">
@@ -3192,9 +3636,19 @@ render();
             <div id="qrCode"></div>
         </div>
 
-        <div class="qr-text">
-            SCAN QR INI UNTUK MELANJUTKAN TRANSAKSI
-        </div>
+        <div class="qr-total-label">
+    TOTAL PEMBAYARAN
+</div>
+
+<div id="qrTotal" class="qr-total">
+    Rp0
+</div>
+
+<div class="qr-text">
+    SCAN QR INI UNTUK MELANJUTKAN TRANSAKSI
+    <br>
+    Masukkan nominal sesuai total di atas
+</div>
 
         <button type="button" class="download-qr" onclick="playClickSound(); downloadQR()">
     ⬇ DOWNLOAD QR
@@ -3210,10 +3664,47 @@ render();
 </div>
 
 
-
-        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
+
+
+const noteAPK = `
+Jika kalian sudah membeli dan tidak tahu cara makainya/pakainya
+kalian bisa minta tutorial ke admin dan kalo masih belum bisa
+maka akan di ajarkan sampai bisa.
+`;
+
+const noteSetMobi = `
+Jika kalian membeli SET MOBI terutamakan TRYHARD
+"SOALNYA APA BANG?"
+Soalnya jika kalian membeli SET MOBI itu ada HUD sama KEYMAPPING
+nya baru yang harus di pasang.
+
+Jika kalian tidak mau pasang kalian bisa pakai HUD/KEYMAPPINGAN
+lu sendiri.
+
+Jadi kalo beli SET MOBI usahakan TRYHARD SAMPAY HAFAL.
+Kalo sudah hafal enak buat main nya jadi mudah dan enak.
+`;
+
+const noteSetAndro = `
+Jika kalian membeli SET ANDRO hanya untuk AUTO HEADSHOT (HS)
+kalian salah.
+
+SET ANDRO adalah settingan Android yang untuk meringan kan
+permainan dan mendapatkan ke licinan layar.
+
+"🗣️: BANG AKU BELI SET ANDRO KOK NGGAK ENAK/KURANG BUAT HS NYA?"
+
+Kalian kalo beli SET ANDRO usahakan bisa DRAG.
+Soalnya SET ANDRO di setting untuk mendapatkan bidikan
+yang ON POIN.
+
+Dan jika kalian sudah bisa DRAG jadi enak untuk mendapatkan
+HEADSHOT (HS).
+`;
+
 
 const SUPABASE_URL =
 "https://ziewxisqzzjyrvvyrlvb.supabase.co";
@@ -3221,152 +3712,22 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
 "sb_publishable_kl8inDCwX8Ul2VtjIHfHYg_wgrvrU0D";
 
+
 const supabaseClient =
 window.supabase.createClient(
     SUPABASE_URL,
     SUPABASE_KEY,
     {
-        auth: {
-            persistSession: true,
-            autoRefreshToken: true,
-            detectSessionInUrl: true,
-            flowType: "pkce"
-        }
+  
+        auth:{
+    persistSession:true,
+    autoRefreshToken:true,
+    detectSessionInUrl:true,
+    flowType:"pkce"
+  }
     }
 );
 
-
-/* ================= GOOGLE LOGIN ================= */
-
-window.loginGoogle = async function(){
-
-    const { error } =
-        await supabaseClient.auth.signInWithOAuth({
-
-            provider: "google",
-
-            options: {
-                redirectTo:
-                "https://zyalek651-star.github.io/Website-AFENGXMOBI-STORE/",
-
-                queryParams: {
-                    prompt: "select_account"
-                }
-            }
-
-        });
-
-    if(error){
-
-        console.error(
-            "GOOGLE LOGIN ERROR:",
-            error
-        );
-
-        alert(
-            "Gagal login Google:\n" +
-            error.message
-        );
-
-    }
-
-};
-
-
-/* ================= UPDATE AUTH UI ================= */
-
-async function updateAuthUI(session){
-
-    if(session === undefined){
-
-        const result =
-            await supabaseClient.auth.getSession();
-
-        session =
-            result.data.session;
-
-    }
-
-    const loginButton =
-        document.getElementById("loginButton");
-
-    const registerButton =
-        document.getElementById("registerButton");
-
-    const historyButton =
-        document.getElementById("historyButton");
-
-    const avatar =
-        document.getElementById("googleAvatar");
-
-    const buyButtonText =
-        document.getElementById("buyButtonText");
-
-
-    if(session){
-
-        console.log(
-            "LOGIN BERHASIL:",
-            session.user.email
-        );
-
-        if(loginButton)
-            loginButton.style.display = "none";
-
-        if(registerButton)
-            registerButton.style.display = "none";
-
-        if(historyButton)
-            historyButton.style.display = "block";
-
-        if(buyButtonText)
-            buyButtonText.textContent =
-                "🛒 BELI SEKARANG";
-
-
-        const picture =
-            session.user.user_metadata?.avatar_url ||
-            session.user.user_metadata?.picture ||
-            "";
-
-        if(picture && avatar){
-
-            avatar.src = picture;
-            avatar.style.display = "block";
-
-        }
-
-    }else{
-
-        console.log("BELUM LOGIN");
-
-        if(loginButton)
-            loginButton.style.display = "block";
-
-        if(registerButton)
-            registerButton.style.display = "block";
-
-        if(historyButton)
-            historyButton.style.display = "none";
-
-        if(avatar)
-            avatar.style.display = "none";
-
-        if(buyButtonText)
-            buyButtonText.textContent =
-                "🔐 LOGIN UNTUK BELI";
-
-    }
-
-}
-
-
-/* ================= CEK SESSION ================= */
-
-updateAuthUI();
-
-
-/* ================= SESSION BERUBAH ================= */
 
 supabaseClient.auth.onAuthStateChange(
     function(event, session){
@@ -3381,177 +3742,7 @@ supabaseClient.auth.onAuthStateChange(
     }
 );
 
-
-/* ================= RIWAYAT ================= */
-
-async function showTransactionHistory(){
-
-    playClickSound();
-
-    document.getElementById("homePage").style.display = "none";
-    document.getElementById("detailPage").style.display = "none";
-    document.getElementById("historyPage").style.display = "block";
-
-    const list =
-        document.getElementById("historyList");
-
-    list.innerHTML =
-        "Memuat riwayat transaksi...";
-
-    const { data, error } =
-        await supabaseClient
-        .from("transactions")
-        .select("*")
-        .order("created_at", {
-            ascending:false
-        });
-
-    if(error){
-
-        console.error(error);
-
-        list.innerHTML =
-            "❌ Gagal memuat riwayat transaksi.";
-
-        return;
-    }
-
-    if(!data || data.length === 0){
-
-        list.innerHTML =
-            "Belum ada transaksi.";
-
-        return;
-    }
-
-    list.innerHTML = "";
-
-    data.forEach(function(t){
-
-        const item =
-            document.createElement("div");
-
-        item.className =
-            "transaction-item";
-
-        item.innerHTML = `
-
-            <div class="transaction-title">
-                ${t.product_name || "Produk"}
-            </div>
-
-            <div>
-                Varian:
-                ${t.variant_name || "-"}
-            </div>
-
-            <div>
-                Jumlah:
-                ${t.quantity || 1}
-            </div>
-
-            <div>
-                Total:
-                Rp ${Number(
-                    t.total_price || 0
-                ).toLocaleString("id-ID")}
-            </div>
-
-            <div>
-                Status:
-                ${t.payment_status || "pending"}
-            </div>
-
-            <div>
-                Waktu:
-                ${
-                    t.created_at
-                    ? new Date(
-                        t.created_at
-                    ).toLocaleString("id-ID")
-                    : "-"
-                }
-            </div>
-
-            ${
-                t.proof_url
-                ? `
-                    <a
-                        href="${t.proof_url}"
-                        target="_blank">
-                        📷 Lihat Bukti Transaksi
-                    </a>
-                  `
-                : `
-                    <div>
-                        📷 Bukti belum tersedia
-                    </div>
-                  `
-            }
-
-        `;
-
-        list.appendChild(item);
-
-    });
-
-}
-
-
-/* ================= TUTUP RIWAYAT ================= */
-
-function closeTransactionHistory(){
-
-    playClickSound();
-
-    document.getElementById(
-        "historyPage"
-    ).style.display = "none";
-
-    document.getElementById(
-        "homePage"
-    ).style.display = "block";
-
-    window.scrollTo(0,0);
-
-}
-
-</script>
-
-
-/* ================= CEK SESSION ================= */
-
-supabaseClient.auth.onAuthStateChange(
-    function(event, session){
-
-        console.log("AUTH EVENT:", event);
-
-        updateAuthUI(session);
-
-    }
-);
-
-
-/* CEK SESSION SAAT HALAMAN DIBUKA */
-
-supabaseClient.auth.getSession().then(
-    function(result){
-
-        console.log(
-            "SESSION:",
-            result.data.session
-        );
-
-        updateAuthUI(
-            result.data.session
-        );
-
-    }
-);
-
-
-/* CEK LOGIN SAAT HALAMAN DIBUKA */
-checkLogin();
+updateAuthUI();
 
 
 /* ================= RIWAYAT TRANSAKSI ================= */
@@ -3560,127 +3751,149 @@ async function showTransactionHistory(){
 
     playClickSound();
 
-    document.getElementById("homePage").style.display = "none";
+    const homePage = document.getElementById("homePage");
+    const detailPage = document.getElementById("detailPage");
+    const historyPage = document.getElementById("historyPage");
+    const list = document.getElementById("historyList");
 
-    document.getElementById("detailPage").style.display = "none";
+    if(homePage){
+        homePage.style.display = "none";
+    }
 
-    document.getElementById("historyPage").style.display = "block";
+    if(detailPage){
+        detailPage.style.display = "none";
+    }
 
+    if(historyPage){
+        historyPage.style.display = "block";
+    }
 
-    const list =
-        document.getElementById("historyList");
+    if(!list){
+        console.error("historyList tidak ditemukan");
+        return;
+    }
 
+    list.innerHTML = "Memuat riwayat transaksi...";
 
-    list.innerHTML =
-        "Memuat riwayat transaksi...";
+    try{
 
+        const result = await supabaseClient
+            .from("transactions")
+            .select("*")
+            .order("created_at", {
+                ascending:false
+            });
 
-    const { data, error } =
-        await supabaseClient
-        .from("transactions")
-        .select("*")
-        .order("created_at", {
-            ascending:false
+        console.log("HASIL TRANSAKSI:", result);
+
+        if(result.error){
+
+            console.error(
+                "SUPABASE ERROR:",
+                result.error
+            );
+
+            list.innerHTML = `
+                ❌ Gagal memuat riwayat transaksi.<br><br>
+                ${result.error.message}
+            `;
+
+            return;
+        }
+
+        const data = result.data;
+
+        if(!data || data.length === 0){
+
+            list.innerHTML =
+                "Belum ada transaksi.";
+
+            return;
+        }
+
+        list.innerHTML = "";
+
+        data.forEach(function(t){
+
+            const item =
+                document.createElement("div");
+
+            item.className =
+                "transaction-item";
+
+            item.innerHTML = `
+
+                <div class="transaction-title">
+                    ${t.product_name || "Produk"}
+                </div>
+
+                <div>
+                    Varian:
+                    ${t.variant_name || "-"}
+                </div>
+
+                <div>
+                    Jumlah:
+                    ${t.quantity || 1}
+                </div>
+
+                <div>
+                    Total:
+                    Rp ${Number(
+                        t.total_price || 0
+                    ).toLocaleString("id-ID")}
+                </div>
+
+                <div>
+                    Status:
+                    ${t.payment_status || "pending"}
+                </div>
+
+                <div>
+                    Waktu:
+                    ${
+                        t.created_at
+                        ? new Date(
+                            t.created_at
+                          ).toLocaleString("id-ID")
+                        : "-"
+                    }
+                </div>
+
+                ${
+                    t.proof_url
+                    ? `
+                        <a
+                            href="${t.proof_url}"
+                            target="_blank">
+                            📷 Lihat Bukti Transaksi
+                        </a>
+                    `
+                    : `
+                        <div>
+                            📷 Bukti belum tersedia
+                        </div>
+                    `
+                }
+
+            `;
+
+            list.appendChild(item);
+
         });
 
+    }catch(error){
 
-    if(error){
+        console.error(
+            "ERROR RIWAYAT:",
+            error
+        );
 
-        console.error(error);
-
-        list.innerHTML =
-            "❌ Gagal memuat riwayat transaksi.";
-
-        return;
-
-    }
-
-
-    if(!data || data.length === 0){
-
-        list.innerHTML =
-            "Belum ada transaksi.";
-
-        return;
-
-    }
-
-
-    list.innerHTML = "";
-
-
-    data.forEach(function(t){
-
-        const item =
-            document.createElement("div");
-
-
-        item.className =
-            "transaction-item";
-
-
-        item.innerHTML = `
-
-            <div class="transaction-title">
-                ${t.product_name || "Produk"}
-            </div>
-
-            <div>
-                Varian:
-                ${t.variant_name || "-"}
-            </div>
-
-            <div>
-                Jumlah:
-                ${t.quantity || 1}
-            </div>
-
-            <div>
-                Total:
-                Rp ${Number(
-                    t.total_price || 0
-                ).toLocaleString("id-ID")}
-            </div>
-
-            <div>
-                Status:
-                ${t.payment_status || "pending"}
-            </div>
-
-            <div>
-                Waktu:
-                ${
-                    t.created_at
-                    ? new Date(
-                        t.created_at
-                      ).toLocaleString("id-ID")
-                    : "-"
-                }
-            </div>
-
-            ${
-                t.proof_url
-                ? `
-                    <a
-                        href="${t.proof_url}"
-                        target="_blank">
-                        📷 Lihat Bukti Transaksi
-                    </a>
-                  `
-                : `
-                    <div>
-                        📷 Bukti belum tersedia
-                    </div>
-                  `
-            }
-
+        list.innerHTML = `
+            ❌ Terjadi kesalahan saat memuat transaksi.<br><br>
+            ${error.message || error}
         `;
-
-
-        list.appendChild(item);
-
-    });
-
+    }
 }
 
 
@@ -3688,46 +3901,179 @@ function closeTransactionHistory(){
 
     playClickSound();
 
+    const historyPage =
+        document.getElementById("historyPage");
 
-    document.getElementById(
-        "historyPage"
-    ).style.display = "none";
+    const homePage =
+        document.getElementById("homePage");
 
+    const detailPage =
+        document.getElementById("detailPage");
 
-    document.getElementById(
-        "homePage"
-    ).style.display = "block";
+    if(historyPage){
+        historyPage.style.display = "none";
+    }
 
+    if(detailPage){
+        detailPage.style.display = "none";
+    }
+
+    if(homePage){
+        homePage.style.display = "block";
+    }
 
     window.scrollTo(0,0);
-
 }
 
 </script>
 
 
-  <div id="historyPage" style="display:none;">
+<div id="historyPage">
 
-    <button
-        type="button"
-        class="back-button"
-        onclick="closeTransactionHistory()">
-        ← KEMBALI
-    </button>
+    <div class="history-topbar">
+        <button type="button" class="history-back" onclick="window.closeTransactionHistory && window.closeTransactionHistory()">
+            ← KEMBALI
+        </button>
 
-    <div class="history-box">
-
-        <h2>📋 RIWAYAT TRANSAKSI</h2>
-
-        <div id="historyList">
-            Memuat riwayat transaksi...
-        </div>
-
+        <div class="history-title">RIWAYAT</div>
     </div>
 
-  </div>
-  
-</body>
-</html>
+    <div class="history-box">
+        <h2>📋 RIWAYAT TRANSAKSI</h2>
+        <div id="historyList">Memuat riwayat transaksi...</div>
+    </div>
+
+</div>
+
+<script>
+/* ================= RIWAYAT TRANSAKSI - FIX FINAL ================= */
+(function(){
+
+    function getSupabase(){
+        if(window.supabaseClient) return window.supabaseClient;
+        if(typeof supabaseClient !== "undefined") return supabaseClient;
+        if(window.supabase && typeof window.supabase.createClient === "function"){
+            const url = "https://ziewxisqzzjyrvvyrlvb.supabase.co";
+            const key = "sb_publishable_kl8inDCwX8Ul2VtjIHfHYg_wgrvrU0D";
+            window.__historySupabaseClient = window.__historySupabaseClient || window.supabase.createClient(url,key);
+            return window.__historySupabaseClient;
+        }
+        return null;
+    }
+
+    window.showTransactionHistory = async function(){
+        const home = document.getElementById("homePage");
+        const detail = document.getElementById("detailPage");
+        const history = document.getElementById("historyPage");
+        const list = document.getElementById("historyList");
+
+        if(!history || !list){
+            console.error("historyPage/historyList tidak ditemukan");
+            return;
+        }
+
+        try{
+            if(typeof playClickSound === "function") playClickSound();
+        }catch(e){}
+
+        if(home) home.style.display = "none";
+        if(detail) detail.style.display = "none";
+        history.style.display = "block";
+        window.scrollTo(0,0);
+        list.innerHTML = "Memuat riwayat transaksi...";
+
+        const client = getSupabase();
+        if(!client){
+            list.innerHTML = "❌ Supabase belum siap.";
+            return;
+        }
+
+        try{
+            const {data,error} = await client
+                .from("transactions")
+                .select("*")
+                .order("created_at", {ascending:false});
+
+            if(error){
+                console.error("SUPABASE ERROR:", error);
+                list.innerHTML = `❌ Gagal memuat riwayat transaksi.<br><br>${error.message || error}`;
+                return;
+            }
+
+            if(!data || data.length === 0){
+                list.innerHTML = "Belum ada transaksi.";
+                return;
+            }
+
+            list.innerHTML = "";
+
+            data.forEach(function(t){
+                const item = document.createElement("div");
+                item.className = "transaction-item";
+
+                const product = document.createElement("div");
+                product.className = "transaction-title";
+                product.textContent = t.product_name || "Produk";
+                item.appendChild(product);
+
+                const rows = [
+                    ["Varian", t.variant_name || "-"],
+                    ["Jumlah", t.quantity || 1],
+                    ["Total", "Rp " + Number(t.total_price || 0).toLocaleString("id-ID")],
+                    ["Status", t.payment_status || "pending"],
+                    ["Waktu", t.created_at ? new Date(t.created_at).toLocaleString("id-ID") : "-"]
+                ];
+
+                rows.forEach(function(row){
+                    const div = document.createElement("div");
+                    div.textContent = row[0] + ": " + row[1];
+                    item.appendChild(div);
+                });
+
+                if(t.proof_url){
+                    const link = document.createElement("a");
+                    link.href = t.proof_url;
+                    link.target = "_blank";
+                    link.rel = "noopener noreferrer";
+                    link.textContent = "📷 Lihat Bukti Transaksi";
+                    item.appendChild(link);
+                }else{
+                    const proof = document.createElement("div");
+                    proof.textContent = "📷 Bukti belum tersedia";
+                    item.appendChild(proof);
+                }
+
+                list.appendChild(item);
+            });
+        }catch(error){
+            console.error("ERROR RIWAYAT:", error);
+            list.innerHTML = `❌ Terjadi kesalahan saat memuat transaksi.<br><br>${error.message || error}`;
+        }
+    };
+
+    window.closeTransactionHistory = function(){
+        try{
+            if(typeof playClickSound === "function") playClickSound();
+        }catch(e){}
+
+        const history = document.getElementById("historyPage");
+        const home = document.getElementById("homePage");
+        const detail = document.getElementById("detailPage");
+
+        if(history) history.style.display = "none";
+        if(detail) detail.style.display = "none";
+        if(home) home.style.display = "block";
+        window.scrollTo(0,0);
+    };
+
+    const button = document.getElementById("historyButton");
+    if(button){
+        button.addEventListener("click", function(e){
+            e.preventDefault();
+            window.showTransactionHistory();
+        });
+    }
+})();
+</script>
 </body>
 </html>
