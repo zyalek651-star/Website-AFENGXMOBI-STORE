@@ -3057,14 +3057,14 @@ function home(){
 async function buy(){
 
     const { data } =
-        await supabaseClient.auth.getSession();
+    await supabaseClient.auth.getSession();
 
-    if(!data.session){
+if(!data.session){
 
-        await loginGoogle();
+    await loginGoogle();
 
-        return;
-    }
+    return;
+}
 
     document
         .getElementById("qrOverlay")
@@ -3209,227 +3209,225 @@ render();
 
 </div>
 
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
-const SUPABASE_URL = "https://ziewxisqzzjyrvvyrlvb.supabase.co";
-const SUPABASE_KEY = "sb_publishable_kl8inDCwX8Ul2VtjIHfHYg_wgrvrU0D";
 
-const supabaseClient = window.supabase.createClient(
+const SUPABASE_URL =
+"https://ziewxisqzzjyrvvyrlvb.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_kl8inDCwX8Ul2VtjIHfHYg_wgrvrU0D";
+
+
+const supabaseClient =
+window.supabase.createClient(
     SUPABASE_URL,
-    SUPABASE_KEY
+    SUPABASE_KEY,
+    {
+        auth:{
+            persistSession:true,
+            autoRefreshToken:true,
+            detectSessionInUrl:true,
+            flowType:"pkce"
+        }
+    }
 );
 
-console.log("Supabase terhubung:", !!supabaseClient);
-  async function loginGoogle(){
+
+/* GOOGLE LOGIN */
+
+window.loginGoogle = async function(){
 
     const { error } =
         await supabaseClient.auth.signInWithOAuth({
+
             provider:"google",
-            options: {
-    redirectTo:
-        window.location.origin +
-        window.location.pathname,
 
-    queryParams: {
-        prompt: "select_account"
-    }
-  }
-        });
-
-    if(error){
-        console.error(error);
-        alert("Gagal membuka login Google.");
-    }
-
-}
-
-
-async function updateAuthUI(){
-console.log("Supabase terhubung:", !!supabaseClient);
-  async function loginGoogle(){
-
-    const { error } =
-        await supabaseClient.auth.signInWithOAuth({
-            provider: "google",
-            options: {
+            options:{
                 redirectTo:
-                    window.location.origin +
-                    window.location.pathname
+                    "https://zyalek651-star.github.io/Website-AFENGXMOBI-STORE/",
+
+                queryParams:{
+                    prompt:"select_account"
+                }
             }
+
         });
+
 
     if(error){
 
-        console.error(error);
+        console.error(
+            "LOGIN GOOGLE ERROR:",
+            error
+        );
 
         alert(
-            "Gagal membuka login Google: " +
+            "Gagal login Google: " +
             error.message
         );
 
     }
 
-  }
-    async function updateAuthUI(){
+};
 
-    const { data } =
+
+/* UPDATE TAMPILAN LOGIN */
+
+async function updateAuthUI(){
+
+    const { data, error } =
         await supabaseClient.auth.getSession();
 
-    const session = data.session;
 
-    const buyButtonText =
-        document.getElementById("buyButtonText");
+    if(error){
+
+        console.error(
+            "GET SESSION ERROR:",
+            error
+        );
+
+        return;
+
+    }
+
+
+    const session =
+        data.session;
+
 
     const loginButton =
-        document.getElementById("loginButton");
+        document.getElementById(
+            "loginButton"
+        );
 
     const registerButton =
-        document.getElementById("registerButton");
+        document.getElementById(
+            "registerButton"
+        );
 
     const historyButton =
-        document.getElementById("historyButton");
+        document.getElementById(
+            "historyButton"
+        );
 
     const avatar =
-        document.getElementById("googleAvatar");
+        document.getElementById(
+            "googleAvatar"
+        );
+
+    const buyButtonText =
+        document.getElementById(
+            "buyButtonText"
+        );
 
 
     if(session){
 
-        /* SUDAH LOGIN */
+        console.log(
+            "LOGIN BERHASIL:",
+            session.user.email
+        );
 
-        if(buyButtonText){
+
+        if(loginButton)
+            loginButton.style.display =
+                "none";
+
+
+        if(registerButton)
+            registerButton.style.display =
+                "none";
+
+
+        if(historyButton)
+            historyButton.style.display =
+                "block";
+
+
+        if(buyButtonText)
             buyButtonText.textContent =
                 "🛒 BELI SEKARANG";
-        }
 
-        if(loginButton){
-            loginButton.style.display = "none";
-        }
-
-        if(registerButton){
-            registerButton.style.display = "none";
-        }
-
-        if(historyButton){
-            historyButton.style.display = "block";
-        }
 
         const picture =
             session.user.user_metadata?.avatar_url ||
             session.user.user_metadata?.picture ||
             "";
 
-        if(picture && avatar){
 
-            avatar.src = picture;
-            avatar.style.display = "block";
+        if(
+            picture &&
+            avatar
+        ){
+
+            avatar.src =
+                picture;
+
+            avatar.style.display =
+                "block";
 
         }
+
 
     }else{
 
-        /* BELUM LOGIN */
+        console.log(
+            "BELUM LOGIN"
+        );
 
-        if(buyButtonText){
+
+        if(loginButton)
+            loginButton.style.display =
+                "block";
+
+
+        if(registerButton)
+            registerButton.style.display =
+                "block";
+
+
+        if(historyButton)
+            historyButton.style.display =
+                "none";
+
+
+        if(avatar)
+            avatar.style.display =
+                "none";
+
+
+        if(buyButtonText)
             buyButtonText.textContent =
                 "🔐 LOGIN UNTUK BELI";
-        }
-
-        if(loginButton){
-            loginButton.style.display = "block";
-        }
-
-        if(registerButton){
-            registerButton.style.display = "block";
-        }
-
-        if(historyButton){
-            historyButton.style.display = "none";
-        }
-
-        if(avatar){
-            avatar.style.display = "none";
-        }
 
     }
 
 }
 
 
-/* CEK SAAT WEBSITE DIBUKA */
+/* CEK LOGIN SAAT HALAMAN DIBUKA */
 
 updateAuthUI();
 
 
-/* CEK KALAU STATUS LOGIN BERUBAH */
-
-supabaseClient.auth.onAuthStateChange(function(){
-
-    updateAuthUI();
-
-});
-  const { data } =
-        await supabaseClient.auth.getSession();
-
-    const session = data.session;
-
-    const loginButton =
-        document.getElementById("loginButton");
-
-    const registerButton =
-        document.getElementById("registerButton");
-
-    const historyButton =
-        document.getElementById("historyButton");
-
-    const avatar =
-        document.getElementById("googleAvatar");
-
-    if(session){
-document.getElementById("buyButtonText").textContent =
-    "🛒 BELI SEKARANG";
-        loginButton.style.display = "none";
-        registerButton.style.display = "none";
-
-        historyButton.style.display = "block";
-
-        const user =
-            session.user;
-
-        const picture =
-            user.user_metadata?.avatar_url ||
-            user.user_metadata?.picture ||
-            "";
-
-        if(picture){
-
-            avatar.src = picture;
-            avatar.style.display = "block";
-
-        }
-
-    }else{
-
-        loginButton.style.display = "block";
-        registerButton.style.display = "block";
-
-        historyButton.style.display = "none";
-
-        avatar.style.display = "none";
-
-    }
-
-}
-
+/* CEK KALAU LOGIN BERUBAH */
 
 supabaseClient.auth.onAuthStateChange(
-    function(){
+    function(event, session){
+
+        console.log(
+            "AUTH EVENT:",
+            event
+        );
+
         updateAuthUI();
+
     }
 );
 
-updateAuthUI();
   /* RIWAYAT TRANSAKSI */
 
 async function showTransactionHistory(){
