@@ -3230,7 +3230,7 @@ window.supabase.createClient(
             persistSession:true,
             autoRefreshToken:true,
             detectSessionInUrl:true,
-            flowType:"pkce"
+            flowType:"implicit"
         }
     }
 );
@@ -3401,25 +3401,31 @@ async function checkLogin(){
 }
 
 
-/* ================= STATUS LOGIN BERUBAH ================= */
+/* ================= CEK SESSION ================= */
 
 supabaseClient.auth.onAuthStateChange(
     function(event, session){
 
-        console.log(
-            "AUTH EVENT:",
-            event
-        );
+        console.log("AUTH EVENT:", event);
 
+        updateAuthUI(session);
+
+    }
+);
+
+
+/* CEK SESSION SAAT HALAMAN DIBUKA */
+
+supabaseClient.auth.getSession().then(
+    function(result){
 
         console.log(
             "SESSION:",
-            session
+            result.data.session
         );
 
-
         updateAuthUI(
-            session
+            result.data.session
         );
 
     }
