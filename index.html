@@ -3210,7 +3210,8 @@ render();
 </div>
 
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
 
@@ -3220,22 +3221,19 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
 "sb_publishable_kl8inDCwX8Ul2VtjIHfHYg_wgrvrU0D";
 
-
 const supabaseClient =
 window.supabase.createClient(
     SUPABASE_URL,
     SUPABASE_KEY,
     {
-        auth:{
-            persistSession:true,
-            autoRefreshToken:true,
-            detectSessionInUrl:true,
-            flowType:"implicit"
+        auth: {
+            persistSession: true,
+            autoRefreshToken: true,
+            detectSessionInUrl: true,
+            flowType: "pkce"
         }
     }
 );
-
-
 
 
 /* ================= GOOGLE LOGIN ================= */
@@ -3266,7 +3264,7 @@ window.loginGoogle = async function(){
         );
 
         alert(
-            "Gagal login Google: " +
+            "Gagal login Google:\n" +
             error.message
         );
 
@@ -3275,9 +3273,19 @@ window.loginGoogle = async function(){
 };
 
 
-/* ================= TAMPILAN LOGIN ================= */
+/* ================= UPDATE AUTH UI ================= */
 
-function updateAuthUI(session){
+async function updateAuthUI(session){
+
+    if(session === undefined){
+
+        const result =
+            await supabaseClient.auth.getSession();
+
+        session =
+            result.data.session;
+
+    }
 
     const loginButton =
         document.getElementById("loginButton");
@@ -3302,18 +3310,14 @@ function updateAuthUI(session){
             session.user.email
         );
 
-
         if(loginButton)
             loginButton.style.display = "none";
-
 
         if(registerButton)
             registerButton.style.display = "none";
 
-
         if(historyButton)
             historyButton.style.display = "block";
-
 
         if(buyButtonText)
             buyButtonText.textContent =
@@ -3325,37 +3329,28 @@ function updateAuthUI(session){
             session.user.user_metadata?.picture ||
             "";
 
-
-        if(avatar && picture){
+        if(picture && avatar){
 
             avatar.src = picture;
-
             avatar.style.display = "block";
 
         }
 
     }else{
 
-        console.log(
-            "BELUM LOGIN"
-        );
-
+        console.log("BELUM LOGIN");
 
         if(loginButton)
             loginButton.style.display = "block";
 
-
         if(registerButton)
             registerButton.style.display = "block";
-
 
         if(historyButton)
             historyButton.style.display = "none";
 
-
         if(avatar)
             avatar.style.display = "none";
-
 
         if(buyButtonText)
             buyButtonText.textContent =
@@ -3368,37 +3363,160 @@ function updateAuthUI(session){
 
 /* ================= CEK SESSION ================= */
 
-async function checkLogin(){
+updateAuthUI();
+
+
+/* ================= SESSION BERUBAH ================= */
+
+supabaseClient.auth.onAuthStateChange(
+    function(event, session){
+
+        console.log(
+            "AUTH EVENT:",
+            event
+        );
+
+        updateAuthUI(session);
+
+    }
+);
+
+
+/* ================= RIWAYAT ================= */
+
+async function showTransactionHistory(){
+
+    playClickSound();
+
+    document.getElementById("homePage").style.display = "none";
+    document.getElementById("detailPage").style.display = "none";
+    document.getElementById("historyPage").style.display = "block";
+
+    const list =
+        document.getElementById("historyList");
+
+    list.innerHTML =
+        "Memuat riwayat transaksi...";
 
     const { data, error } =
-        await supabaseClient.auth.getSession();
-
+        await supabaseClient
+        .from("transactions")
+        .select("*")
+        .order("created_at", {
+            ascending:false
+        });
 
     if(error){
 
-        console.error(
-            "GET SESSION ERROR:",
-            error
-        );
+        console.error(error);
 
-        updateAuthUI(null);
+        list.innerHTML =
+            "❌ Gagal memuat riwayat transaksi.";
 
         return;
-
     }
 
+    if(!data || data.length === 0){
 
-    console.log(
-        "SESSION SAAT HALAMAN DIBUKA:",
-        data.session
-    );
+        list.innerHTML =
+            "Belum ada transaksi.";
 
+        return;
+    }
 
-    updateAuthUI(
-        data.session
-    );
+    list.innerHTML = "";
+
+    data.forEach(function(t){
+
+        const item =
+            document.createElement("div");
+
+        item.className =
+            "transaction-item";
+
+        item.innerHTML = `
+
+            <div class="transaction-title">
+                ${t.product_name || "Produk"}
+            </div>
+
+            <div>
+                Varian:
+                ${t.variant_name || "-"}
+            </div>
+
+            <div>
+                Jumlah:
+                ${t.quantity || 1}
+            </div>
+
+            <div>
+                Total:
+                Rp ${Number(
+                    t.total_price || 0
+                ).toLocaleString("id-ID")}
+            </div>
+
+            <div>
+                Status:
+                ${t.payment_status || "pending"}
+            </div>
+
+            <div>
+                Waktu:
+                ${
+                    t.created_at
+                    ? new Date(
+                        t.created_at
+                    ).toLocaleString("id-ID")
+                    : "-"
+                }
+            </div>
+
+            ${
+                t.proof_url
+                ? `
+                    <a
+                        href="${t.proof_url}"
+                        target="_blank">
+                        📷 Lihat Bukti Transaksi
+                    </a>
+                  `
+                : `
+                    <div>
+                        📷 Bukti belum tersedia
+                    </div>
+                  `
+            }
+
+        `;
+
+        list.appendChild(item);
+
+    });
 
 }
+
+
+/* ================= TUTUP RIWAYAT ================= */
+
+function closeTransactionHistory(){
+
+    playClickSound();
+
+    document.getElementById(
+        "historyPage"
+    ).style.display = "none";
+
+    document.getElementById(
+        "homePage"
+    ).style.display = "block";
+
+    window.scrollTo(0,0);
+
+}
+
+</script>
 
 
 /* ================= CEK SESSION ================= */
