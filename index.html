@@ -3230,7 +3230,7 @@ window.supabase.createClient(
             persistSession:true,
             autoRefreshToken:true,
             detectSessionInUrl:true,
-            flowType:"implicit"
+            flowType:"pkce"
         }
     }
 );
@@ -3426,8 +3426,7 @@ supabaseClient.auth.onAuthStateChange(
 );
 
 
-/* ================= JALANKAN CEK SESSION ================= */
-
+/* CEK LOGIN SAAT HALAMAN DIBUKA */
 checkLogin();
 
 
