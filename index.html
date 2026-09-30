@@ -3236,6 +3236,8 @@ window.supabase.createClient(
 );
 
 
+
+
 /* ================= GOOGLE LOGIN ================= */
 
 window.loginGoogle = async function(){
@@ -3243,14 +3245,14 @@ window.loginGoogle = async function(){
     const { error } =
         await supabaseClient.auth.signInWithOAuth({
 
-            provider:"google",
+            provider: "google",
 
-            options:{
+            options: {
                 redirectTo:
                 "https://zyalek651-star.github.io/Website-AFENGXMOBI-STORE/",
 
-                queryParams:{
-                    prompt:"select_account"
+                queryParams: {
+                    prompt: "select_account"
                 }
             }
 
@@ -3332,10 +3334,11 @@ function updateAuthUI(session){
 
         }
 
-
     }else{
 
-        console.log("BELUM LOGIN");
+        console.log(
+            "BELUM LOGIN"
+        );
 
 
         if(loginButton)
@@ -3363,75 +3366,9 @@ function updateAuthUI(session){
 }
 
 
-/* ================= CEK CALLBACK GOOGLE ================= */
+/* ================= CEK SESSION ================= */
 
-async function checkGoogleCallback(){
-
-    const url =
-        new URL(window.location.href);
-
-    const code =
-        url.searchParams.get("code");
-
-
-    /*
-       Kalau Google mengembalikan ?code=...
-       tukarkan code tersebut menjadi session
-    */
-
-    if(code){
-
-        console.log(
-            "Google code ditemukan, menukar menjadi session..."
-        );
-
-
-        const { data, error } =
-            await supabaseClient.auth.exchangeCodeForSession(
-                code
-            );
-
-
-        if(error){
-
-            console.error(
-                "EXCHANGE CODE ERROR:",
-                error
-            );
-
-            alert(
-                "Login Google gagal: " +
-                error.message
-            );
-
-            return;
-
-        }
-
-
-        console.log(
-            "SESSION BERHASIL:",
-            data.session
-        );
-
-
-        /*
-           Hapus ?code= dari URL
-           tanpa reload halaman
-        */
-
-        window.history.replaceState(
-            {},
-            document.title,
-            window.location.pathname
-        );
-
-    }
-
-
-    /*
-       Ambil session setelah callback selesai
-    */
+async function checkLogin(){
 
     const { data, error } =
         await supabaseClient.auth.getSession();
@@ -3444,9 +3381,17 @@ async function checkGoogleCallback(){
             error
         );
 
+        updateAuthUI(null);
+
         return;
 
     }
+
+
+    console.log(
+        "SESSION SAAT HALAMAN DIBUKA:",
+        data.session
+    );
 
 
     updateAuthUI(
@@ -3466,15 +3411,24 @@ supabaseClient.auth.onAuthStateChange(
             event
         );
 
-        updateAuthUI(session);
+
+        console.log(
+            "SESSION:",
+            session
+        );
+
+
+        updateAuthUI(
+            session
+        );
 
     }
 );
 
 
-/* ================= JALANKAN ================= */
+/* ================= JALANKAN CEK SESSION ================= */
 
-checkGoogleCallback();
+checkLogin();
 
 
 /* ================= RIWAYAT TRANSAKSI ================= */
