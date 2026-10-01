@@ -262,6 +262,75 @@ body{
   }
 
 
+
+/* ================= BUKTI TRANSAKSI ================= */
+.proof-intro-box{
+    margin-top:16px;
+    margin-bottom:12px;
+    padding:16px;
+    box-sizing:border-box;
+    border:1px solid rgba(0,234,255,.55);
+    border-radius:16px;
+    background:linear-gradient(145deg,rgba(14,30,43,.98),rgba(7,15,24,.98));
+    box-shadow:0 0 14px rgba(0,234,255,.10),inset 0 0 12px rgba(0,234,255,.04);
+}
+
+.proof-intro-box .proof-intro-text{
+    color:#fff;
+    font-size:14px;
+    font-weight:900;
+    line-height:1.75;
+    white-space:pre-line;
+}
+
+.proof-info-box{
+    margin-top:16px;
+    padding:18px;
+    box-sizing:border-box;
+    border:1px solid rgba(0,234,255,.45);
+    border-radius:16px;
+    background:linear-gradient(145deg,#111e2b,#08111b);
+    box-shadow:0 0 14px rgba(0,234,255,.08),inset 0 0 12px rgba(0,234,255,.03);
+}
+
+.proof-info-box .proof-info-title{
+    color:#00eaff;
+    font-size:18px;
+    font-weight:1000;
+    line-height:1.5;
+    margin-bottom:12px;
+}
+
+.proof-info-box .proof-info-text{
+    color:#fff;
+    font-size:14px;
+    font-weight:800;
+    line-height:1.75;
+    white-space:pre-line;
+}
+
+.proof-info-box .proof-wa-button{
+    display:block;
+    width:100%;
+    box-sizing:border-box;
+    margin-top:16px;
+    padding:14px 16px;
+    border:2px solid #8b5cf6;
+    border-radius:12px;
+    background:linear-gradient(135deg,#168cff,#6a35ff,#9b4dff);
+    color:#fff;
+    text-align:center;
+    text-decoration:none;
+    font-size:15px;
+    font-weight:1000;
+    box-shadow:0 0 12px rgba(99,102,241,.45),0 5px 0 #4520a0,0 8px 18px rgba(0,0,0,.45);
+}
+
+.proof-info-box .proof-wa-button:active{
+    transform:translateY(3px);
+    box-shadow:0 0 8px rgba(99,102,241,.35),0 2px 0 #4520a0,0 4px 10px rgba(0,0,0,.45);
+}
+
 /* DETAIL */
 
 #detailPage{
@@ -1580,106 +1649,6 @@ body{
     font-weight:900;
 }
 
-
-
-/* PAYMENT QRIS CARD */
-.payment-box{
-    width:100%;
-    box-sizing:border-box;
-    margin:22px 0 8px;
-    padding:22px 20px 20px;
-    background:linear-gradient(145deg,#101d2a,#0b141f);
-    border:1.5px solid #19d8ff;
-    border-radius:18px;
-    box-shadow:0 0 18px rgba(25,216,255,.16), inset 0 0 22px rgba(0,0,0,.16);
-    color:#fff;
-}
-
-.payment-box h2{
-    margin:0 0 18px;
-    text-align:center;
-    font-size:24px;
-    color:#fff;
-    letter-spacing:.4px;
-    text-shadow:0 0 8px rgba(25,216,255,.25);
-}
-
-.payment-info{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:12px;
-    padding:11px 0;
-    border-bottom:1px solid rgba(130,155,175,.20);
-    font-size:16px;
-    color:#b7c5d2;
-}
-
-.payment-info:last-of-type{
-    border-bottom:0;
-}
-
-.payment-info b{
-    color:#fff;
-    text-align:right;
-    word-break:break-word;
-}
-
-#paymentTotal{
-    color:#16d9ff;
-    font-size:19px;
-}
-
-.qris-placeholder{
-    margin-top:16px;
-    padding:13px 14px;
-    text-align:center;
-    border:1px solid rgba(25,216,255,.55);
-    border-radius:12px;
-    background:rgba(25,216,255,.08);
-    color:#18d9ff;
-    font-weight:800;
-}
-
-.payment-note{
-    margin:14px 0 12px;
-    padding:12px 14px;
-    border-left:4px solid #19d8ff;
-    border-radius:10px;
-    background:rgba(255,255,255,.045);
-    color:#c7d2dc;
-    font-size:14px;
-    line-height:1.5;
-}
-
-.send-proof{
-    display:block;
-    width:100%;
-    box-sizing:border-box;
-    padding:14px 16px;
-    text-align:center;
-    text-decoration:none;
-    border-radius:12px;
-    background:linear-gradient(135deg,#19d8ff,#0bb8dc);
-    color:#07131c !important;
-    font-size:16px;
-    font-weight:900;
-    box-shadow:0 5px 14px rgba(25,216,255,.18);
-}
-
-.send-proof:active{
-    transform:scale(.985);
-}
-
-@media(max-width:480px){
-    .payment-box{
-        margin-top:18px;
-        padding:18px 14px 16px;
-        border-radius:16px;
-    }
-    .payment-box h2{font-size:22px;}
-    .payment-info{font-size:15px;}
-}
 </style>
 
 </head>
@@ -2648,7 +2617,7 @@ body{
     <button
     class="buy"
     type="button"
-    onclick="buy()">
+    onclick="playClickSound(); buy()">
 
     <span id="buyButtonText">
         BUY/SCAN QR UNTUK BUY
@@ -2656,6 +2625,84 @@ body{
 
     </button>
       
+
+
+<!-- ================= INFO SEBELUM BUKTI TRANSAKSI ================= -->
+<div class="proof-intro-box">
+    <div class="proof-intro-text">JIKA KALIAN SUDAH MELAKUKAN TRANSAKSI/SUDAH TF MAKA KIRIM BUKTI TF/TRANSAKSI KE NOMOR ADMIN/WHATSAPP ADMIN PASTIKAN KETIKA MENGIRIM BUKTI TF/TRANSAKSI KIRIM FOTO BIKTI TF SAMA KASIH TEKS DI BAWAH INI</div>
+</div>
+
+<!-- ================= BUKTI TRANSAKSI ================= -->
+<div class="proof-info-box">
+
+    <div class="proof-info-title">
+        🧾𝗕𝗨𝗞𝗧𝗜 𝗧𝗥𝗔𝗡𝗦𝗔𝗞𝗦𝗜 𝗔𝗙𝗘𝗡𝗚𝗫𝗠𝗢𝗕𝗜 𝗦𝗧𝗢𝗥𝗘
+    </div>
+
+    <div class="proof-info-text">
+🌐𝗕𝗨𝗬 𝗟𝗘𝗪𝗔𝗧 𝗪𝗘𝗕✅
+📦 𝗕𝗔𝗥𝗔𝗡𝗚 ： (𝗕𝗔𝗥𝗔𝗡𝗚 𝗬𝗔𝗡𝗚 𝗞𝗔𝗠𝗨 𝗕𝗘𝗟𝗜)✅
+💰 𝗛𝗔𝗥𝗚𝗔 ： (𝗧𝗢𝗧𝗔𝗟 𝗛𝗔𝗥𝗚𝗔/𝗡𝗢𝗠𝗜𝗡𝗔𝗟)✅
+💳 𝗣𝗘𝗠𝗕𝗔𝗬𝗔𝗥𝗔𝗡 ： 𝗤𝗥𝗜𝗦✅
+📝 𝗡𝗢𝗧𝗘 ： 𝗡𝗢 𝗥𝗘𝗙𝗙✅
+
+📌𝗧𝗘𝗥𝗜𝗠𝗔𝗞𝗔𝗦𝗜𝗛 𝗨𝗗𝗔𝗛 𝗕𝗨𝗬 𝗗𝗜 𝗔𝗙𝗘𝗡𝗚 𝗦𝗧𝗢𝗥𝗘📌
+    </div>
+
+    <a
+        class="proof-wa-button"
+        href="https://wa.me/628972540100?text=Halo%20Admin%20AfengXMobi%20Store%2C%20saya%20ingin%20mengirim%20bukti%20TF%2Ftransaksi.%20Berikut%20bukti%20transaksinya."
+        target="_blank"
+        rel="noopener noreferrer">
+        📲 KIRIM BUKTI TF KE ADMIN — PENCET TOMBOL INI
+    </a>
+
+</div>
+
+      <div id="paymentBox" class="payment-box" style="display:none;">
+
+    <h2>PEMBAYARAN QRIS</h2>
+
+    <div class="payment-info">
+        Produk:
+        <b id="paymentProduct">-</b>
+    </div>
+
+    <div class="payment-info">
+        Jumlah:
+        <b id="paymentQty">1</b>
+    </div>
+
+    <div class="payment-info">
+        Total:
+        <b id="paymentTotal">Rp 0</b>
+    </div>
+
+    <a
+        href="https://ibb.co.com/gNkkjXW"
+        target="_blank">
+
+        <div class="qris-placeholder">
+            📱 BUKA QRIS PEMBAYARAN
+        </div>
+
+    </a>
+
+    <p class="payment-note">
+        Setelah transfer, kirim bukti pembayaran ke WhatsApp Admin.
+    </p>
+
+    <a
+        id="sendProof"
+        class="send-proof"
+        href="#"
+        target="_blank">
+
+        📱 KIRIM BUKTI TRANSFER
+
+    </a>
+
+      </div>
       
     </div>
 
@@ -3356,8 +3403,8 @@ function renderVariants(){
 }
 let promoPercent = 0;
   
-const PROMO_CODE = "AFENGVOUCHER";
-const PROMO_DISCOUNT = 80;
+const PROMO_CODE = "ALIGANTENG";
+const PROMO_DISCOUNT = 10;
 const PROMO_EXP = "2026-09-30";
   
 
@@ -3558,44 +3605,22 @@ function home(){
 
 
 /* BUY */
+async function buy(){
 
-                function buy(){
+    const total =
+        document.getElementById("total").textContent;
 
-    if(!current || !selected){
-        alert("Pilih produk dan varian terlebih dahulu.");
-        return;
-    }
+    document
+        .getElementById("qrTotal")
+        .textContent = total;
 
-    const totalNumber = Math.floor(
-        selected[1] *
-        qty *
-        (100 - (promoPercent || 0)) /
-        100
-    );
+    document
+        .getElementById("qrOverlay")
+        .style.display = "flex";
 
-    const totalText =
-        "Rp " + totalNumber.toLocaleString("id-ID");
+    generateQR();
 
-    const qrTotal =
-        document.getElementById("qrTotal");
-
-    if(qrTotal){
-        qrTotal.textContent = totalText;
-    }
-
-    const overlay =
-        document.getElementById("qrOverlay");
-
-    if(overlay){
-        overlay.style.display = "flex";
-    }
-
-    try{
-        generateQR();
-    }catch(error){
-        console.error("QR ERROR:", error);
-    }
-                    }
+      }
 
 let qrLibraryLoaded = false;
 
@@ -3747,6 +3772,43 @@ render();
 <script>
 
 
+const noteAPK = `
+Jika kalian sudah membeli dan tidak tahu cara makainya/pakainya
+kalian bisa minta tutorial ke admin dan kalo masih belum bisa
+maka akan di ajarkan sampai bisa.
+`;
+
+const noteSetMobi = `
+Jika kalian membeli SET MOBI terutamakan TRYHARD
+"SOALNYA APA BANG?"
+Soalnya jika kalian membeli SET MOBI itu ada HUD sama KEYMAPPING
+nya baru yang harus di pasang.
+
+Jika kalian tidak mau pasang kalian bisa pakai HUD/KEYMAPPINGAN
+lu sendiri.
+
+Jadi kalo beli SET MOBI usahakan TRYHARD SAMPAY HAFAL.
+Kalo sudah hafal enak buat main nya jadi mudah dan enak.
+`;
+
+const noteSetAndro = `
+Jika kalian membeli SET ANDRO hanya untuk AUTO HEADSHOT (HS)
+kalian salah.
+
+SET ANDRO adalah settingan Android yang untuk meringan kan
+permainan dan mendapatkan ke licinan layar.
+
+"🗣️: BANG AKU BELI SET ANDRO KOK NGGAK ENAK/KURANG BUAT HS NYA?"
+
+Kalian kalo beli SET ANDRO usahakan bisa DRAG.
+Soalnya SET ANDRO di setting untuk mendapatkan bidikan
+yang ON POIN.
+
+Dan jika kalian sudah bisa DRAG jadi enak untuk mendapatkan
+HEADSHOT (HS).
+`;
+
+
 const SUPABASE_URL =
 "https://ziewxisqzzjyrvvyrlvb.supabase.co";
 
@@ -3754,48 +3816,36 @@ const SUPABASE_KEY =
 "sb_publishable_kl8inDCwX8Ul2VtjIHfHYg_wgrvrU0D";
 
 
-function getSupabaseClient(){
-    if(window.__alstoreSupabaseClient){
-        return window.__alstoreSupabaseClient;
+const supabaseClient =
+window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY,
+    {
+  
+        auth:{
+    persistSession:true,
+    autoRefreshToken:true,
+    detectSessionInUrl:true,
+    flowType:"pkce"
+  }
     }
+);
 
-    if(!window.supabase || typeof window.supabase.createClient !== "function"){
-        console.error("Supabase JS belum termuat.");
-        return null;
+
+supabaseClient.auth.onAuthStateChange(
+    function(event, session){
+
+        console.log(
+            "AUTH EVENT:",
+            event
+        );
+
+        updateAuthUI(session);
+
     }
+);
 
-    window.__alstoreSupabaseClient = window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_KEY,
-        {
-            auth:{
-                persistSession:true,
-                autoRefreshToken:true,
-                detectSessionInUrl:true,
-                flowType:"pkce"
-            }
-        }
-    );
-
-    return window.__alstoreSupabaseClient;
-}
-
-// Alias global supaya script lama yang memakai supabaseClient tetap aman.
-var supabaseClient = getSupabaseClient();
-window.supabaseClient = supabaseClient;
-
-if(supabaseClient){
-    supabaseClient.auth.onAuthStateChange(
-        function(event, session){
-            console.log("AUTH EVENT:", event);
-            if(typeof updateAuthUI === "function") updateAuthUI(session);
-        }
-    );
-}
-
-if(typeof updateAuthUI === "function" && supabaseClient){
-    updateAuthUI();
-}
+updateAuthUI();
 
 
 /* ================= RIWAYAT TRANSAKSI ================= */
@@ -4003,9 +4053,14 @@ function closeTransactionHistory(){
 (function(){
 
     function getSupabase(){
-        if(typeof getSupabaseClient === "function") return getSupabaseClient();
-        if(window.__alstoreSupabaseClient) return window.__alstoreSupabaseClient;
         if(window.supabaseClient) return window.supabaseClient;
+        if(typeof supabaseClient !== "undefined") return supabaseClient;
+        if(window.supabase && typeof window.supabase.createClient === "function"){
+            const url = "https://ziewxisqzzjyrvvyrlvb.supabase.co";
+            const key = "sb_publishable_kl8inDCwX8Ul2VtjIHfHYg_wgrvrU0D";
+            window.__historySupabaseClient = window.__historySupabaseClient || window.supabase.createClient(url,key);
+            return window.__historySupabaseClient;
+        }
         return null;
     }
 
